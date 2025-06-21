@@ -4,10 +4,11 @@ import NavbarComponent from "./components/NavbarComponent.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ListProductsComponent from "./components/ProductListComponent.jsx";
 import CategoryListComponent from "./components/CategoryListComponent.jsx";
+import axios from "axios";
 
 function App() {
 
-
+    axios.defaults.baseURL = `http://localhost:8081/api/`;
   return (
     <>
         <BrowserRouter>
