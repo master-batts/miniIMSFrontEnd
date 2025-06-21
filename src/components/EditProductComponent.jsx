@@ -6,6 +6,7 @@ import { getAllCategories } from '../services/CategoryService';
 function EditProductComponent() {
     const { id } = useParams();
     const navigate = useNavigate();
+
     const [product, setProduct] = useState({
         name: '',
         description: '',
@@ -16,6 +17,7 @@ function EditProductComponent() {
     const [categories, setCategories] = useState([]);
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         getProductById(id)
@@ -29,7 +31,10 @@ function EditProductComponent() {
                     categoryId: data.categoryId,
                 });
             })
-            .catch((err) => console.error('Failed to load product', err));
+            .catch((err) => {
+                console.error('Product not found', err);
+                setNotFound(true);
+            });
 
         getAllCategories()
             .then((res) => setCategories(res.data))
@@ -70,6 +75,14 @@ function EditProductComponent() {
             setLoading(false);
         }
     };
+
+    if (notFound) {
+        return (
+            <div className="container mt-4">
+                <h3 className="text-danger">Product does not exist.</h3>
+            </div>
+        );
+    }
 
     return (
         <div className="container mt-4">
