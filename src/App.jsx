@@ -1,12 +1,13 @@
 
 import './App.css'
+import ProductListComponent from "./components/ProductListComponent.jsx";
 
 function App() {
 
 
   return (
     <>
-        <h1>Getting started!</h1>
+        <ProductListComponent />
     </>
   )
 }
