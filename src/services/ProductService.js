@@ -24,3 +24,7 @@ export const updateProduct = (id, product) =>
         quantity: parseInt(product.quantity, 10),
         categoryId: parseInt(product.categoryId, 10),
     });
+
+export const deleteProduct = (id) => {
+    return axios.delete(`products/${id}`);
+};
