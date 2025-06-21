@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ListProductsComponent from "./components/ProductListComponent.jsx";
 import CategoryListComponent from "./components/CategoryListComponent.jsx";
 import axios from "axios";
+import FooterComponent from "./components/FooterComponent.jsx";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/categories" element={<CategoryListComponent />} />
                 </Routes>
             </div>
+            <FooterComponent/>
         </BrowserRouter>
     </>
   )
