@@ -6,6 +6,7 @@ import ListProductsComponent from "./components/ProductListComponent.jsx";
 import CategoryListComponent from "./components/CategoryListComponent.jsx";
 import axios from "axios";
 import FooterComponent from "./components/FooterComponent.jsx";
+import AddProductComponent from "./components/AddProductComponent.jsx";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/" element={<ListProductsComponent />} />
                 <Route path="/products" element={<ListProductsComponent />} />
                 <Route path="/categories" element={<CategoryListComponent />} />
+                <Route path="/add-product" element={<AddProductComponent />} />
                 </Routes>
             </div>
             <FooterComponent/>
