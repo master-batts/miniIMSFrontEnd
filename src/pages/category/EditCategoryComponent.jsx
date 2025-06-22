@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCategoryById, updateCategory } from '../services/CategoryService';
+import { getCategoryById, updateCategory } from '../../services/categoryService.js';
 
 function EditCategoryComponent() {
     const { id } = useParams();

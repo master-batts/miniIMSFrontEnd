@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllCategories, deleteCategory } from '../services/CategoryService';
-import Loader from './Loader';
+import { getAllCategories, deleteCategory } from '../../services/categoryService.js';
+import Loader from '../../components/Loader.jsx';
 
 function CategoryListComponent() {
     const [categories, setCategories] = useState([]);

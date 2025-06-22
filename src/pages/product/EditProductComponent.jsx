@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getProductById, updateProduct } from '../services/ProductService';
-import { getAllCategories } from '../services/CategoryService';
+import { getProductById, updateProduct } from '../../services/ProductService.js';
+import { getAllCategories } from '../../services/categoryService.js';
 
 function EditProductComponent() {
     const { id } = useParams();

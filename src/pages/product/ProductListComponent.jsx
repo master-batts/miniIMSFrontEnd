@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Loader from './Loader.jsx';
-import { getAllProducts, deleteProduct } from '../services/ProductService.js';
+import Loader from '../../components/Loader.jsx';
+import { getAllProducts, deleteProduct } from '../../services/ProductService.js';
 
 function ListProductsComponent() {
     const [products, setProducts] = useState([]);

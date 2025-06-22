@@ -2,14 +2,14 @@
 import './App.css'
 import NavbarComponent from "./components/NavbarComponent.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import ListProductsComponent from "./components/ProductListComponent.jsx";
-import CategoryListComponent from "./components/CategoryListComponent.jsx";
+import ListProductsComponent from "./pages/product/ProductListComponent.jsx";
+import CategoryListComponent from "./pages/category/CategoryListComponent.jsx";
 import axios from "axios";
 import FooterComponent from "./components/FooterComponent.jsx";
-import AddProductComponent from "./components/AddProductComponent.jsx";
-import EditProductComponent from "./components/EditProductComponent.jsx";
-import AddCategoryComponent from "./components/AddCategoryComponent.jsx";
-import EditCategoryComponent from "./components/EditCategoryComponent.jsx";
+import AddProductComponent from "./pages/product/AddProductComponent.jsx";
+import EditProductComponent from "./pages/product/EditProductComponent.jsx";
+import AddCategoryComponent from "./pages/category/AddCategoryComponent.jsx";
+import EditCategoryComponent from "./pages/category/EditCategoryComponent.jsx";
 
 function App() {
 

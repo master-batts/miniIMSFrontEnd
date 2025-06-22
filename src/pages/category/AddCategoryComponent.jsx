@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createCategory } from '../services/CategoryService';
+import { createCategory } from '../../services/categoryService.js';
 
 function AddCategoryComponent() {
     const [category, setCategory] = useState({ name: '', description: '' });
