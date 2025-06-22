@@ -28,7 +28,7 @@ function App() {
                 {/* Categories */}
                 <Route path="/categories" element={<CategoryListComponent />} />
                 <Route path="/add-category" element={<AddCategoryComponent />} />
-                <Route path="/edit-category/:id" element={<EditCategoryComponent />} />
+                <Route path="/categories/edit/:id" element={<EditCategoryComponent />} />
                 </Routes>
             </div>
             <FooterComponent/>

@@ -90,7 +90,7 @@ function CategoryListComponent() {
                             <td>
                                 <button
                                     className="btn btn-warning btn-sm me-2"
-                                    onClick={() => navigate(`/edit-category/${cat.id}`)}
+                                    onClick={() => navigate(`/categories/edit/${cat.id}`)}
                                 >
                                     Edit
                                 </button>
