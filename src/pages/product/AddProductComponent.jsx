@@ -120,6 +120,7 @@ function AddProductComponent() {
                         className={`form-select ${errors.categoryId ? 'is-invalid' : ''}`}
                         value={product.categoryId}
                         onChange={handleChange}
+                        disabled={categories.length === 0}  // disable if no categories
                     >
                         <option value="">-- Select Category --</option>
                         {categories.map(category => (
@@ -128,9 +129,23 @@ function AddProductComponent() {
                             </option>
                         ))}
                     </select>
+
+                    {categories.length === 0 && (
+                        <small className="form-text text-muted mt-1">
+                            No categories available. Please{' '}
+                            <button
+                                type="button"
+                                className="btn btn-link p-0 align-baseline"
+                                onClick={() => navigate('/add-category')}
+                            >
+                                add a category
+                            </button>
+                            .
+                        </small>
+                    )}
+
                     {errors.categoryId && <div className="invalid-feedback">{errors.categoryId}</div>}
                 </div>
-
                 <button
                     type="submit"
                     className="btn btn-primary"
