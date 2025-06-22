@@ -7,7 +7,7 @@ function Loader() {
                 <div className="spinner-border text-primary" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
-                <p className="mt-2">Loading products...</p>
+                <p className="mt-2">Loading...</p>
             </div>
         </div>
     );
