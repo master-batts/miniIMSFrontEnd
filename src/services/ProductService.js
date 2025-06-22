@@ -3,6 +3,9 @@ import axios from 'axios';
 
 export const getAllProducts = () => axios.get('products');
 
+export const getPagedProducts = (page = 0, size = 5, sort = 'id,asc') => {
+    return axios.get(`products/paged?page=${page}&size=${size}&sort=${sort}`);
+};
 
 export const getProductById = (id) => {
     return axios.get(`products/${id}`);

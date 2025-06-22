@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader.jsx';
-import { getAllProducts, deleteProduct } from '../../services/ProductService.js';
+import { getPagedProducts, deleteProduct } from '../../services/ProductService.js';
 
 function ListProductsComponent() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [page, setPage] = useState(0);
+    const [size] = useState(5); // fixed size per page
+    const [totalPages, setTotalPages] = useState(0);
+
     const navigate = useNavigate();
 
-    const fetchProducts = () => {
+    const fetchProducts = (pageNumber = 0) => {
         setLoading(true);
-        getAllProducts()
+        getPagedProducts(pageNumber, size, 'id,asc')
             .then(response => {
-                setProducts(response.data);
+                // Response from Spring Data Pageable contains content, totalPages, etc.
+                setProducts(response.data.content);
+                setTotalPages(response.data.totalPages);
+                setPage(response.data.number);
                 setLoading(false);
             })
             .catch(error => {
@@ -30,11 +37,17 @@ function ListProductsComponent() {
     const handleDelete = (id) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             deleteProduct(id)
-                .then(() => fetchProducts())
+                .then(() => fetchProducts(page))
                 .catch(err => {
                     console.error('Delete failed', err);
                     alert('Failed to delete product');
                 });
+        }
+    };
+
+    const handlePageChange = (newPage) => {
+        if (newPage >= 0 && newPage < totalPages) {
+            fetchProducts(newPage);
         }
     };
 
@@ -79,7 +92,7 @@ function ListProductsComponent() {
                 ) : (
                     products.map((product, index) => (
                         <tr key={product.id}>
-                            <td>{index + 1}</td>
+                            <td>{page * size + index + 1}</td>
                             <td>{product.name}</td>
                             <td>{product.description}</td>
                             <td>{product.price.toFixed(2)}</td>
@@ -104,6 +117,31 @@ function ListProductsComponent() {
                 )}
                 </tbody>
             </table>
+
+            {/* Pagination controls */}
+            <nav>
+                <ul className="pagination justify-content-center">
+                    <li className={`page-item ${page === 0 ? 'disabled' : ''}`}>
+                        <button className="page-link" onClick={() => handlePageChange(page - 1)}>
+                            Previous
+                        </button>
+                    </li>
+
+                    {[...Array(totalPages)].map((_, i) => (
+                        <li key={i} className={`page-item ${page === i ? 'active' : ''}`}>
+                            <button className="page-link" onClick={() => handlePageChange(i)}>
+                                {i + 1}
+                            </button>
+                        </li>
+                    ))}
+
+                    <li className={`page-item ${page === totalPages - 1 ? 'disabled' : ''}`}>
+                        <button className="page-link" onClick={() => handlePageChange(page + 1)}>
+                            Next
+                        </button>
+                    </li>
+                </ul>
+            </nav>
         </div>
     );
 }
