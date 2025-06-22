@@ -2,6 +2,9 @@ import axios from 'axios';
 
 export const getAllCategories = () => axios.get('categories');
 
+export const getCategoriesPaged = (page = 0, size = 5, sort = 'id,asc') =>
+    axios.get(`categories/paged?page=${page}&size=${size}&sort=${sort}`);
+
 export const getCategoryById = (id) => axios.get(`categories/${id}`);
 
 export const createCategory = (category) => axios.post('categories', category);

@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllCategories, deleteCategory } from '../../services/categoryService.js';
+import { getCategoriesPaged, deleteCategory } from '../../services/categoryService.js';
 import Loader from '../../components/Loader.jsx';
 
 function CategoryListComponent() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [page, setPage] = useState(0);
+    const [size] = useState(5); // page size fixed at 5, you can make this dynamic if you want
+    const [totalPages, setTotalPages] = useState(0);
     const navigate = useNavigate();
 
-    const fetchCategories = () => {
+    const fetchCategories = (pageNumber = page) => {
         setLoading(true);
-        getAllCategories()
+        getCategoriesPaged(pageNumber, size)
             .then(response => {
-                setCategories(response.data);
+                setCategories(response.data.content); // page content
+                setTotalPages(response.data.totalPages);
+                setPage(response.data.number);
                 setLoading(false);
             })
             .catch(error => {
@@ -24,17 +29,23 @@ function CategoryListComponent() {
     };
 
     useEffect(() => {
-        fetchCategories();
+        fetchCategories(0); // load first page on mount
     }, []);
 
     const handleDelete = (id) => {
         if (window.confirm('Are you sure you want to delete this category?')) {
             deleteCategory(id)
-                .then(() => fetchCategories())
+                .then(() => fetchCategories(page)) // reload current page after delete
                 .catch(err => {
                     console.error('Delete failed', err);
                     alert('Failed to delete category');
                 });
+        }
+    };
+
+    const handlePageChange = (newPage) => {
+        if (newPage >= 0 && newPage < totalPages) {
+            fetchCategories(newPage);
         }
     };
 
@@ -73,7 +84,7 @@ function CategoryListComponent() {
                 ) : (
                     categories.map((cat, index) => (
                         <tr key={cat.id}>
-                            <td>{index + 1}</td>
+                            <td>{page * size + index + 1}</td>
                             <td>{cat.name}</td>
                             <td>{cat.description}</td>
                             <td>
@@ -95,6 +106,29 @@ function CategoryListComponent() {
                 )}
                 </tbody>
             </table>
+
+            {/* Pagination controls */}
+            <nav aria-label="Page navigation">
+                <ul className="pagination justify-content-center">
+                    <li className={`page-item ${page === 0 ? 'disabled' : ''}`}>
+                        <button className="page-link" onClick={() => handlePageChange(page - 1)}>
+                            Previous
+                        </button>
+                    </li>
+                    {[...Array(totalPages)].map((_, idx) => (
+                        <li key={idx} className={`page-item ${idx === page ? 'active' : ''}`}>
+                            <button className="page-link" onClick={() => handlePageChange(idx)}>
+                                {idx + 1}
+                            </button>
+                        </li>
+                    ))}
+                    <li className={`page-item ${page === totalPages - 1 ? 'disabled' : ''}`}>
+                        <button className="page-link" onClick={() => handlePageChange(page + 1)}>
+                            Next
+                        </button>
+                    </li>
+                </ul>
+            </nav>
         </div>
     );
 }
