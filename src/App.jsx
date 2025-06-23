@@ -10,6 +10,7 @@ import AddProductComponent from "./pages/product/AddProductComponent.jsx";
 import EditProductComponent from "./pages/product/EditProductComponent.jsx";
 import AddCategoryComponent from "./pages/category/AddCategoryComponent.jsx";
 import EditCategoryComponent from "./pages/category/EditCategoryComponent.jsx";
+import RegisterComponent from "./pages/auth/RegisterComponent.jsx";
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
             <NavbarComponent/>
             <div className="main-content container mt-4">
             <Routes>
+                {/* Auth */}
+                <Route path="/register" element={<RegisterComponent />} />
                 {/* Products */}
                 <Route path="/" element={<ListProductsComponent />} />
                 <Route path="/products" element={<ListProductsComponent />} />
