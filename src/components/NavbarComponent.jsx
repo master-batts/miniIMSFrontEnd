@@ -1,7 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import {isAuthenticated} from "../services/authService.js";
+import {removeToken} from "../services/authTokenService.js";
+
 
 function NavbarComponent() {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        removeToken();
+        navigate('/login');
+    };
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container px-3">
@@ -23,38 +33,49 @@ function NavbarComponent() {
 
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
-                        <NavLink
-                            to="/products"
-                            className={({ isActive }) =>
-                                'nav-link px-3' + (isActive ? ' active text-warning' : '')
-                            }
-                        >
-                            Products
-                        </NavLink>
-                        <NavLink
-                            to="/categories"
-                            className={({ isActive }) =>
-                                'nav-link px-3' + (isActive ? ' active text-warning' : '')
-                            }
-                        >
-                            Categories
-                        </NavLink>
-                        <NavLink
-                            to="/login"
-                            className={({ isActive }) =>
-                                'nav-link px-3' + (isActive ? ' active text-warning' : '')
-                            }
-                        >
-                            Login
-                        </NavLink>
-                        <NavLink
-                            to="/register"
-                            className={({ isActive }) =>
-                                'nav-link px-3' + (isActive ? ' active text-warning' : '')
-                            }
-                        >
-                            Register
-                        </NavLink>
+                        {isAuthenticated() && (
+                            <>
+                                <NavLink
+                                    to="/products"
+                                    className={({ isActive }) =>
+                                        'nav-link px-3' + (isActive ? ' active text-warning' : '')
+                                    }
+                                >
+                                    Products
+                                </NavLink>
+                                <NavLink
+                                    to="/categories"
+                                    className={({ isActive }) =>
+                                        'nav-link px-3' + (isActive ? ' active text-warning' : '')
+                                    }
+                                >
+                                    Categories
+                                </NavLink>
+                                <button className="btn btn-outline-warning ms-3" onClick={handleLogout}>
+                                    Logout
+                                </button>
+                            </>
+                        )}
+                        {!isAuthenticated() && (
+                            <>
+                                <NavLink
+                                    to="/login"
+                                    className={({ isActive }) =>
+                                        'nav-link px-3' + (isActive ? ' active text-warning' : '')
+                                    }
+                                >
+                                    Login
+                                </NavLink>
+                                <NavLink
+                                    to="/register"
+                                    className={({ isActive }) =>
+                                        'nav-link px-3' + (isActive ? ' active text-warning' : '')
+                                    }
+                                >
+                                    Register
+                                </NavLink>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
