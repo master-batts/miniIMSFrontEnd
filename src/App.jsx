@@ -11,6 +11,7 @@ import AddCategoryComponent from "./pages/category/AddCategoryComponent.jsx";
 import EditCategoryComponent from "./pages/category/EditCategoryComponent.jsx";
 import RegisterComponent from "./pages/auth/RegisterComponent.jsx";
 import LoginComponent from "./pages/auth/LoginComponent.jsx";
+import AuthRoute from "./hoc/AuthRoute.jsx";
 
 function App() {
 
@@ -22,17 +23,18 @@ function App() {
             <div className="main-content container mt-4">
             <Routes>
                 {/* Auth */}
-                <Route path="/register" element={<RegisterComponent />} />
-                <Route path="/login" element={<LoginComponent />} />
+                <Route path="/register" element={<AuthRoute element={<RegisterComponent />} restricted={true} />} />
+                <Route path="/login" element={<AuthRoute element={<LoginComponent />} restricted={true} />} />
+                {/* Protected Routes */}
                 {/* Products */}
-                <Route path="/" element={<ListProductsComponent />} />
-                <Route path="/products" element={<ListProductsComponent />} />
-                <Route path="/add-product" element={<AddProductComponent />} />
-                <Route path="/products/edit/:id" element={<EditProductComponent />} />
+                <Route path="/" element={<AuthRoute element={<ListProductsComponent />} />} />
+                <Route path="/products" element={<AuthRoute element={<ListProductsComponent />} />} />
+                <Route path="/add-product" element={<AuthRoute element={<AddProductComponent />} />} />
+                <Route path="/products/edit/:id" element={<AuthRoute element={<EditProductComponent />} />} />
                 {/* Categories */}
-                <Route path="/categories" element={<CategoryListComponent />} />
-                <Route path="/add-category" element={<AddCategoryComponent />} />
-                <Route path="/categories/edit/:id" element={<EditCategoryComponent />} />
+                <Route path="/categories" element={<AuthRoute element={<CategoryListComponent />} />} />
+                <Route path="/add-category" element={<AuthRoute element={<AddCategoryComponent />} />} />
+                <Route path="/categories/edit/:id" element={<AuthRoute element={<EditCategoryComponent />} />} />
                 </Routes>
             </div>
             <FooterComponent/>
