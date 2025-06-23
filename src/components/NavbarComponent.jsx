@@ -8,8 +8,11 @@ function NavbarComponent() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        removeToken();
-        navigate('/login');
+        const confirmed = window.confirm("Are you sure you want to log out?");
+        if (confirmed) {
+            removeToken();
+            navigate('/login');
+        }
     };
 
     return (
