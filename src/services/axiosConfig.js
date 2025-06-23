@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getToken} from './authTokenService';
+import {getToken, removeToken} from './authTokenService';
 
 axios.defaults.baseURL = `http://localhost:8081/api/`;
 
@@ -15,5 +15,16 @@ axios.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+
+axios.interceptors.response.use(response => {
+    return response;
+}, error => {
+    if (error.response.status === 401) {
+        removeToken();
+        window.location.href = '/login';
+    }
+    return error;
+});
 
 export default axios;
