@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/authService.js';
-import {setToken} from "../../services/authTokenService.js";
+import { useAuth } from '../../context/AuthContext.jsx'; // make sure the path is correct
 
 function LoginComponent() {
     const navigate = useNavigate();
+    const { login } = useAuth();
+
     const [credentials, setCredentials] = useState({
         usernameOrEmail: '',
         password: ''
@@ -37,9 +39,9 @@ function LoginComponent() {
 
         try {
             const res = await loginUser(credentials);
-            //localStorage.setItem('token', res.data.token);
-            setToken(res.data.accessToken)
-            navigate('/'); // or to dashboard
+            const token = res.data.accessToken;
+            login(token);
+            navigate('/');
         } catch (err) {
             console.error(err);
             setServerError(err.response?.data?.message || 'Login failed.');

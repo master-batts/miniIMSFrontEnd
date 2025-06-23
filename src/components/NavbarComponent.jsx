@@ -1,16 +1,14 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import {isAuthenticated} from "../services/authService.js";
-import {removeToken} from "../services/authTokenService.js";
-
+import { useAuth } from '../context/AuthContext.jsx';
 
 function NavbarComponent() {
     const navigate = useNavigate();
+    const { isAuthenticated, logout } = useAuth();
 
     const handleLogout = () => {
-        const confirmed = window.confirm("Are you sure you want to log out?");
-        if (confirmed) {
-            removeToken();
+        if (window.confirm("Are you sure you want to log out?")) {
+            logout();
             navigate('/login');
         }
     };
@@ -36,7 +34,7 @@ function NavbarComponent() {
 
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
-                        {isAuthenticated() && (
+                        {isAuthenticated ? (
                             <>
                                 <NavLink
                                     to="/products"
@@ -58,8 +56,7 @@ function NavbarComponent() {
                                     Logout
                                 </button>
                             </>
-                        )}
-                        {!isAuthenticated() && (
+                        ) : (
                             <>
                                 <NavLink
                                     to="/login"
