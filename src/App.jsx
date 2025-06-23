@@ -11,6 +11,7 @@ import EditProductComponent from "./pages/product/EditProductComponent.jsx";
 import AddCategoryComponent from "./pages/category/AddCategoryComponent.jsx";
 import EditCategoryComponent from "./pages/category/EditCategoryComponent.jsx";
 import RegisterComponent from "./pages/auth/RegisterComponent.jsx";
+import LoginComponent from "./pages/auth/LoginComponent.jsx";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             <Routes>
                 {/* Auth */}
                 <Route path="/register" element={<RegisterComponent />} />
+                <Route path="/login" element={<LoginComponent />} />
                 {/* Products */}
                 <Route path="/" element={<ListProductsComponent />} />
                 <Route path="/products" element={<ListProductsComponent />} />

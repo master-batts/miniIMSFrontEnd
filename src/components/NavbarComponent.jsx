@@ -40,6 +40,14 @@ function NavbarComponent() {
                             Categories
                         </NavLink>
                         <NavLink
+                            to="/login"
+                            className={({ isActive }) =>
+                                'nav-link px-3' + (isActive ? ' active text-warning' : '')
+                            }
+                        >
+                            Login
+                        </NavLink>
+                        <NavLink
                             to="/register"
                             className={({ isActive }) =>
                                 'nav-link px-3' + (isActive ? ' active text-warning' : '')
