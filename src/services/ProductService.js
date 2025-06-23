@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import axiosInstance from './axiosConfig';
 
 export const getAllProducts = () => axios.get('products');
 

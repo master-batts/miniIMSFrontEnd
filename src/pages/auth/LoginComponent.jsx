@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/authService.js';
+import {setToken} from "../../services/authTokenService.js";
 
 function LoginComponent() {
     const navigate = useNavigate();
@@ -36,8 +37,8 @@ function LoginComponent() {
 
         try {
             const res = await loginUser(credentials);
-            // Example: save token to localStorage
-            localStorage.setItem('token', res.data.token);
+            //localStorage.setItem('token', res.data.token);
+            setToken(res.data.accessToken)
             navigate('/'); // or to dashboard
         } catch (err) {
             console.error(err);

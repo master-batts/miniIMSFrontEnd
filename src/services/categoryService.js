@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosInstance from './axiosConfig';
 
 export const getAllCategories = () => axios.get('categories');
 

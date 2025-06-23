@@ -4,7 +4,6 @@ import NavbarComponent from "./components/NavbarComponent.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ListProductsComponent from "./pages/product/ProductListComponent.jsx";
 import CategoryListComponent from "./pages/category/CategoryListComponent.jsx";
-import axios from "axios";
 import FooterComponent from "./components/FooterComponent.jsx";
 import AddProductComponent from "./pages/product/AddProductComponent.jsx";
 import EditProductComponent from "./pages/product/EditProductComponent.jsx";
@@ -15,7 +14,7 @@ import LoginComponent from "./pages/auth/LoginComponent.jsx";
 
 function App() {
 
-    axios.defaults.baseURL = `http://localhost:8081/api/`;
+
   return (
     <>
         <BrowserRouter>
