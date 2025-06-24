@@ -8,3 +8,7 @@ export const registerUser = (userData) => {
 export const loginUser = (credentials) => {
     return axios.post('auth/login', credentials);
 };
+
+export const fetchCurrentUser = () => {
+    return axiosInstance.get('user/me');
+};

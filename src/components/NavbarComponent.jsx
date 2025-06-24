@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 
 function NavbarComponent() {
     const navigate = useNavigate();
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated, user, logout } = useAuth();
 
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to log out?")) {
@@ -33,9 +33,12 @@ function NavbarComponent() {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav ms-auto">
+                    <div className="navbar-nav ms-auto align-items-center">
                         {isAuthenticated ? (
                             <>
+                <span className="navbar-text text-warning me-3">
+                  Welcome, {user?.username || user?.name || 'User'}
+                </span>
                                 <NavLink
                                     to="/products"
                                     className={({ isActive }) =>
