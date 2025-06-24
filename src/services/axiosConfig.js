@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {getToken, removeToken} from './authTokenService';
 
-axios.defaults.baseURL = `http://localhost:8081/api/`;
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
 axios.interceptors.request.use(
     (config) => {
