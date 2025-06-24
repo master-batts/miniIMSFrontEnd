@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import { FaBoxOpen, FaTags, FaSignOutAlt, FaUserCircle, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 
 function NavbarComponent() {
     const navigate = useNavigate();
     const { isAuthenticated, user, logout } = useAuth();
 
     const handleLogout = () => {
-        if (window.confirm("Are you sure you want to log out?")) {
+        if (window.confirm('Are you sure you want to log out?')) {
             logout();
             navigate('/login');
         }
@@ -29,53 +30,81 @@ function NavbarComponent() {
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
-                    <span className="navbar-toggler-icon"></span>
+                    <span className="navbar-toggler-icon" />
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto align-items-center">
                         {isAuthenticated ? (
                             <>
-                <span className="navbar-text text-warning me-3">
-                  Welcome, {user?.username || user?.name || 'User'}
-                </span>
                                 <NavLink
                                     to="/products"
                                     className={({ isActive }) =>
-                                        'nav-link px-3' + (isActive ? ' active text-warning' : '')
+                                        'nav-link d-flex align-items-center px-3' +
+                                        (isActive ? ' active text-warning' : '')
                                     }
                                 >
-                                    Products
+                                    <FaBoxOpen className="me-1" /> Products
                                 </NavLink>
+
                                 <NavLink
                                     to="/categories"
                                     className={({ isActive }) =>
-                                        'nav-link px-3' + (isActive ? ' active text-warning' : '')
+                                        'nav-link d-flex align-items-center px-3' +
+                                        (isActive ? ' active text-warning' : '')
                                     }
                                 >
-                                    Categories
+                                    <FaTags className="me-1" /> Categories
                                 </NavLink>
-                                <button className="btn btn-outline-warning ms-3" onClick={handleLogout}>
-                                    Logout
-                                </button>
+
+                                {/* User dropdown */}
+                                <div className="nav-item dropdown">
+                                    <a
+                                        className="nav-link dropdown-toggle d-flex align-items-center text-warning"
+                                        href="#!"
+                                        id="userDropdown"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <FaUserCircle className="me-1 fs-5" />
+                                        {user?.username || user?.name || 'User'}
+                                    </a>
+                                    <ul
+                                        className="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="userDropdown"
+                                    >
+                                        <li>
+                                            <button
+                                                className="dropdown-item d-flex align-items-center text-danger"
+                                                onClick={handleLogout}
+                                            >
+                                                <FaSignOutAlt className="me-2" /> Logout
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
                             </>
                         ) : (
                             <>
                                 <NavLink
                                     to="/login"
                                     className={({ isActive }) =>
-                                        'nav-link px-3' + (isActive ? ' active text-warning' : '')
+                                        'nav-link d-flex align-items-center px-3' +
+                                        (isActive ? ' active text-warning' : '')
                                     }
                                 >
-                                    Login
+                                    <FaSignInAlt className="me-1" /> Login
                                 </NavLink>
+
                                 <NavLink
                                     to="/register"
                                     className={({ isActive }) =>
-                                        'nav-link px-3' + (isActive ? ' active text-warning' : '')
+                                        'nav-link d-flex align-items-center px-3' +
+                                        (isActive ? ' active text-warning' : '')
                                     }
                                 >
-                                    Register
+                                    <FaUserPlus className="me-1" /> Register
                                 </NavLink>
                             </>
                         )}
