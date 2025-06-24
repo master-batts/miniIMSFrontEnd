@@ -1,12 +1,85 @@
-# React + Vite
+# MiniIMS Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📝 Overview
 
-Currently, two official plugins are available:
+This is the frontend application for the MiniIMS system. It is built with **React**, powered by **Vite**, and uses **Context API** for state management. It communicates with a Spring Boot backend via RESTful APIs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React + Vite setup  
+- State management with React Context API  
+- Environment-based API configuration  
+- Authenticated API communication with JWT  
+- Connects to the MiniIMS backend  
+
+---
+
+## 🛠️ Tech Stack
+
+- React  
+- JavaScript  
+- Vite  
+- Context API  
+- Axios  
+- Bootstrap  
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Prerequisites
+
+- [Node.js](https://nodejs.org/) installed  
+- Backend API running (see the backend README for setup)
+
+---
+
+### 2. Clone the Repository
+
+Clone the frontend project to your local machine and navigate into the project folder:
+
+```bash
+git clone <repository-url>
+cd miniims-frontend
+```
+
+---
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 4. Configure Environment
+
+An `.env` file is already provided in the project root.  
+You only need to **edit** the following line:
+
+```env
+VITE_API_BASE_URL=http://localhost:8081/api/
+```
+
+> 🔧 **Important:** If you change the backend port (default is `8081`) or run it on a different host, make sure to update this URL accordingly.
+
+---
+
+### 5. Start the Development Server
+
+```bash
+npm run dev
+```
+
+The app will be available at: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 📦 Usage
+
+- Communicates with the backend at the URL set in `VITE_API_BASE_URL`.  
+- For backend API reference, see: [Swagger UI](http://localhost:8081/swagger-ui/index.html)  
+- Ensure the backend is running and CORS is configured properly before using the app.
